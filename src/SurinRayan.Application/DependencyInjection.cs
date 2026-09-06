@@ -22,6 +22,7 @@ public static class DependencyInjection
             cfg.AddOpenBehavior(typeof(ValidationBehavior<,>)); // روش جدید ثبت Pipeline Behavior در نسخه‌های جدید
         });
 
+
         return services;
     }
 }

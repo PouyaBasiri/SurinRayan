@@ -1,5 +1,7 @@
 ﻿using SurinRayan.Application;
+using SurinRayan.Application.Common.Interfaces;
 using SurinRayan.Infrastructure;
+using SurinRayan.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 builder.Services.AddCors(options =>
 {
