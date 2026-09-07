@@ -36,14 +36,14 @@ export function ContactMessagesManager() {
 
   // تابع دریافت داده‌ها با useCallback
 const fetchMessages = useCallback(async () => {
-    console.log("🚀 شروع دریافت پیام‌ها..."); // این لاگ را اضافه کنید
+   // console.log("🚀 شروع دریافت پیام‌ها..."); // این لاگ را اضافه کنید
   setLoading(true);
   setAlert(null); // پاک کردن آلرت‌های قبلی
   try {
     const result = await getContactRequests(page, 10);
     setData(result);
   } catch (err: unknown) {
-    console.error("❌ خطا در fetchMessages:", err); // این لاگ را اضافه کنید
+    // console.error("❌ خطا در fetchMessages:", err); // این لاگ را اضافه کنید
 
     if (err instanceof Error) {
       setAlert({ type: "error", text: err.message || "خطا در ارتباط با سرور" });
@@ -56,17 +56,17 @@ const fetchMessages = useCallback(async () => {
 }, [page]);
 
 useEffect(() => {
-  console.log("🔥 کامپوننت رندر شد و useEffect فراخوانی شد!");
+  //console.log("🔥 کامپوننت رندر شد و useEffect فراخوانی شد!");
 
   async function loadData() {
     setLoading(true);
     try {
-      console.log("📡 در حال ارسال درخواست به API...");
+      //console.log("📡 در حال ارسال درخواست به API...");
       const result = await getContactRequests(page, 10);
-      console.log("✅ پاسخ از سرور دریافت شد:", result);
+      //console.log("✅ پاسخ از سرور دریافت شد:", result);
       setData(result);
     } catch (err: unknown) {
-      console.error("❌ خطا در دریافت پیام‌ها:", err);
+      //console.error("❌ خطا در دریافت پیام‌ها:", err);
       setAlert({ 
         type: "error", 
         text: (err as Error)?.message || "خطا در ارتباط با API" 
@@ -107,7 +107,7 @@ useEffect(() => {
             ),
           };
         });
-        console.error("خطا در به‌روزرسانی وضعیت خوانده‌شده", err);
+        //console.error("خطا در به‌روزرسانی وضعیت خوانده‌شده", err);
       }
     }
   };
