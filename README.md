@@ -1,36 +1,59 @@
-# 🚀 SurinRayan - Admin Panel & Contact Management System
+# 🚀 SurinRayan — Admin Dashboard & Contact Management System
 
-سیستم مدیریت پیام‌ها و پنل ادمین سورین رایان، توسعه داده شده با معماری مدرن وب شامل بک‌اند .NET 8 و فرانت‌اند Next.js 15.
+A modern full-stack web application designed for managing incoming customer support requests and administrative management, built with a **.NET 8 Web API** backend and a **Next.js 15 (App Router)** frontend.
 
 ---
 
-## 🛠 تکنولوژی‌های استفاده شده (Tech Stack)
+## 🛠 Tech Stack
 
 ### Backend (.NET 10)
-- **Framework:** ASP.NET Core Web API (.NET 8)
-- **Authentication:** JWT Bearer Token Validation
-- **Architecture:** Clean Architecture / CQRS Ready
-- **Email Service:** MailKit & MimeKit (SMTP Integration)
+- **Framework:** ASP.NET Core Web API (.NET 10)
+- **Authentication & Security:** JWT Bearer Token, Claim-based authorization
+- **Architecture:** Clean Layered Architecture / DTO Patterns
+- **Services:** Protocol Buffers / gRPC support, MailKit/MimeKit integration
 
-### Frontend (Next.js)
-- **Framework:** Next.js (App Router) & React 19
-- **Styling:** Tailwind CSS & Lucide Icons
-- **Security:** Middleware-based Route Protection & Cookie/JWT Management
-
----
-
-## 🔑 ویژگی‌های کلیدی (Features)
-
-- [x] **سیستم احراز هویت (Auth):** ورود امن با JWT Token و قابلیت Logout.
-- [x] **محافظت از روت‌ها:** استفاده از Next.js Middleware جهت بستن دسترسی‌های غیرمجاز به مسیرهای `/admin/*`.
-- [x] **مدیریت پیام‌ها:** مشاهده پیام‌های دریافتی، فیلتر کردن بر اساس وضعیت و پاسخ به کاربران.
-- [x] **ارسال پاسخ (Email/Database):** قابلیت ذخیره پاسخ در دیتابیس و ارسال ایمیل پاسخ به کاربر.
+### Frontend (Next.js 15)
+- **Framework:** Next.js 15 (App Router) & React 19
+- **Styling:** Tailwind CSS, Lucide Icons
+- **State & Auth:** JWT Decode, Secure Cookie/Storage Management, Middleware Route Guarding
 
 ---
 
-## 🚀 راه اندازی پروژه (Getting Started)
+## ✨ Key Features
 
-### 1. اجرای بک‌اند (.NET 10)
+- 🔐 **JWT Authentication System:** Secure admin login flow with token generation, decoding, and cookie/local storage persistence.
+- 🛡️ **Protected Route Guards:** Client-side and server-side route protection using Next.js `middleware.ts` for all `/admin/*` routes.
+- 💬 **Contact Request Management:** View, filter, and review incoming user messages in an intuitive admin panel.
+- 📬 **Database Persistence & Email Handler:** Flexible reply system designed to persist admin responses in the database with optional email transmission handlers.
+- 🎨 **Responsive Admin UI:** Custom sidebar navigation with active path highlighting, dynamic user profile presentation, and hydration-safe rendering.
+
+---
+
+## 📁 Repository Structure
+
+```text
+SurinRayan/
+├── backend/          # .NET 8 Web API Solution
+│   ├── Controllers/  # Auth & ContactRequest Controllers
+│   ├── DTOs/         # Request & Response Data Transfer Objects
+│   ├── Services/     # JWT Generator & Business Logic Services
+│   └── Program.cs    # Middleware Configuration & Dependency Injection
+│
+├── frontend/         # Next.js 15 Application
+│   ├── src/
+│   │   ├── app/      # App Router Pages (/admin, /login)
+│   │   ├── components# Admin Layout, Sidebar, UI Modules
+│   │   ├── lib/      # API Handlers & HTTP Clients
+│   │   └── middleware.ts # Route Protection Guard
+│   └── package.json
+│
+├── .gitignore
+└── README.md
+
+
+## 🚀 Getting Started
+
+### 1.‌ .NET 10
 ```bash
 cd backend
 dotnet restore
@@ -38,7 +61,7 @@ dotnet run
 http://localhost:5054
 ```
 
-### ### 2. اجرای فرانت‌اند (Next.js)
+### 2. Next.js
 ```bash
 cd frontend
 npm install
