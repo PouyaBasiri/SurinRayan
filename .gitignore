@@ -482,3 +482,23 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+```gitignore
+# Node / Next.js
+node_modules/
+.next/
+out/
+build/
+*.log
+
+# .NET / C#
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+appsettings.Development.json
+
+# Environment & Secrets
+.env
+.env.local
