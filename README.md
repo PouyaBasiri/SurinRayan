@@ -1,6 +1,6 @@
 # 🚀 SurinRayan — Admin Dashboard & Contact Management System
 
-A modern full-stack web application designed for managing incoming customer support requests and administrative management, built with a **.NET 8 Web API** backend and a **Next.js 15 (App Router)** frontend.
+A modern full-stack web application designed for managing incoming customer support requests and administrative management, built with a **.NET 10 Web API** backend and a **Next.js 15 (App Router)** frontend.
 
 ---
 
