@@ -71,7 +71,7 @@ npm run dev
 URL:http://localhost:3000
 ```
 
-### 3.🔑 Demo Access Credentials
+## 🔑 Demo Access Credentials
 To test the admin panel out of the box:
 
 Login Route: /login
