@@ -58,7 +58,8 @@ SurinRayan/
 cd backend
 dotnet restore
 dotnet run
-http://localhost:5054
+
+URL:http://localhost:5054
 ```
 
 ### 2. Next.js
@@ -67,5 +68,14 @@ cd frontend
 npm install
 npm run dev
 
-http://localhost:3000
+URL:http://localhost:3000
 ```
+
+### 3.🔑 Demo Access Credentials
+To test the admin panel out of the box:
+
+Login Route: /login
+
+Email: admin@surinrayan.ir
+
+Password: admin123
