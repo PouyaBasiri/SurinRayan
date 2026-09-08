@@ -30,6 +30,40 @@ services:
     networks:
       - surinrayan_network
 
+  backend:
+    build:
+      context: .
+      dockerfile: src/SurinRayan.Api/Dockerfile 
+    container_name: surinrayan_backend
+    restart: always
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=surinrayan_db;Username=postgres;Password=postgres
+      - JwtSettings__SecretKey=YourSuperSecretKeyForJwtAuthentication123456!
+      - JwtSettings__Issuer=SurinRayanApi
+      - JwtSettings__Audience=SurinRayanClient
+    depends_on:
+      - postgres
+    networks:
+      - surinrayan_network
+
+  frontend:
+    build:
+      context: ./frontend/web
+      dockerfile: Dockerfile
+    container_name: surinrayan_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000
+    depends_on:
+      - backend
+    networks:
+      - surinrayan_network
+
 volumes:
   postgres_data:
     driver: local

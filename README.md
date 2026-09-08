@@ -33,22 +33,16 @@ A modern full-stack web application designed for managing incoming customer supp
 
 ```text
 SurinRayan/
-├── backend/          # .NET 8 Web API Solution
-│   ├── Controllers/  # Auth & ContactRequest Controllers
-│   ├── DTOs/         # Request & Response Data Transfer Objects
-│   ├── Services/     # JWT Generator & Business Logic Services
-│   └── Program.cs    # Middleware Configuration & Dependency Injection
-│
-├── frontend/         # Next.js 15 Application
-│   ├── src/
-│   │   ├── app/      # App Router Pages (/admin, /login)
-│   │   ├── components# Admin Layout, Sidebar, UI Modules
-│   │   ├── lib/      # API Handlers & HTTP Clients
-│   │   └── middleware.ts # Route Protection Guard
-│   └── package.json
-│
+├── .github/          
+├── frontend/
+│   └── web/          Next.js (شامل src, package.json و...)
+├── src/              .NET (Controllers, Services, DTOs)
+├── tests/            Unit Tests / Integration Tests
 ├── .gitignore
-└── README.md
+├── docker-compose.yml
+├── NuGet.Config
+├── README.md
+└── SurinRayan.sln    # .NET 10 Web API Solution
 ```
 
 ## 🚀 Getting Started

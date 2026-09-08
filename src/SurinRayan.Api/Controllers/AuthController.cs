@@ -18,7 +18,6 @@ namespace SurinRayan.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto model)
         {
-            // نمونه ساده جهت تست اولیه فرانت‌اند (می‌توانید بعداً به دیتابیس متصل کنید)
             if (model.Email == "admin@surinrayan.ir" && model.Password == "admin123")
             {
                 var token = _jwtTokenGenerator.GenerateToken("1", model.Email, "Admin");

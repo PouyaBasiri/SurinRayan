@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5054/api";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
 // --- Types ---
 
@@ -32,7 +32,7 @@ export interface PaginatedResult<T> {
 
 // --- Public APIs ---
 
-// ۱. ارسال فرم تماس با ما (کاربر عادی)
+// 1. Submitting the "Contact Us" form (Standard User)
 export async function sendContactRequest(data: ContactFormData) {
   const response = await fetch(`${API_BASE_URL}/ContactRequest`, {
     method: "POST",
@@ -61,21 +61,21 @@ function getAuthHeader(): Record<string, string> {
   return {};
 }
 
-// ۲. دریافت لیست پیام‌ها با صفحه‌بندی (پنل مدیریت)
+// 2. Retrieve paginated list of messages (Admin panel)
 export async function getContactRequests(page: number = 1, pageSize: number = 10) {
 const response = await fetch(
-    `http://localhost:5054/api/ContactRequest?pageNumber=${page}&pageSize=${pageSize}`,
+    `http://localhost:5000/api/ContactRequest?pageNumber=${page}&pageSize=${pageSize}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        ...getAuthHeader(), // 👈 ارسال توکن
+        ...getAuthHeader(), // 👈 Send token
       },
     }
   );
 
 if (response.status === 401) {
-    // اگر توکن منقضی شده بود، هدایت به لاگین
+    // Redirect to login if the token has expired.
     if (typeof window !== "undefined") {
       document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
       localStorage.removeItem("token");
@@ -92,7 +92,7 @@ if (response.status === 401) {
 
 }
 
-// ۳. علامت‌گذاری پیام به عنوان خوانده‌شده (پنل مدیریت)
+// 3. Mark message as read (Admin panel)
 export async function markContactRequestAsRead(id: string): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/Contact/${id}/read`, {
     method: "PATCH",
@@ -103,7 +103,7 @@ export async function markContactRequestAsRead(id: string): Promise<void> {
   }
 }
 
-// ۴. ارسال پاسخ ایمیلی به پیام (پنل مدیریت)
+// 4. Send email reply to message (Admin panel)
 export async function replyToContactRequest(id: string, replyMessage: string): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/ContactRequest/${id}/reply`, {
     method: "POST",
@@ -117,7 +117,7 @@ export async function replyToContactRequest(id: string, replyMessage: string): P
 }
 
 export async function loginAdmin(credentials: { email: string; password: string }) {
-  const response = await fetch("http://localhost:5054/api/Auth/login", {
+  const response = await fetch("http://localhost:5000/api/Auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -130,5 +130,5 @@ export async function loginAdmin(credentials: { email: string; password: string 
     throw new Error(errorData?.message || "نام کاربری یا رمز عبور نادرست است.");
   }
 
-  return await response.json(); // خروجی متناسب: { token: "..." }
+  return await response.json(); 
 }

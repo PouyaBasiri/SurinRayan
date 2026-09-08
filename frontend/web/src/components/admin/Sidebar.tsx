@@ -21,14 +21,14 @@ export default function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // مقدار اولیه ساده برای جلوگیری از عدم تطابق SSR و Client
+  // Simple initial value to prevent SSR and client mismatch
   const [userInfo, setUserInfo] = useState<{ email: string; role: string }>({
     email: "مدیر سیستم",
     role: "Admin",
   });
 
   useEffect(() => {
-    // خواندن localStorage فقط پس از Mount شدن در مرورگر (کلاینت)
+    // Reading localStorage only after mounting in the browser (client-side)
     const token = localStorage.getItem("token");
     if (token) {
       try {

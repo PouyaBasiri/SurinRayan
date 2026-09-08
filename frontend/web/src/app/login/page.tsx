@@ -25,7 +25,7 @@ export default function LoginPage() {
     try {
       const response = await loginAdmin({ email, password });
       
-      // ذخیره توکن در کوکی برای دسترسی Middleware
+      // Storing the token in a cookie for middleware access
       document.cookie = `token=${response.token}; path=/; max-age=86400; SameSite=Lax`;
       localStorage.setItem("token", response.token);
 

@@ -30,14 +30,14 @@ public class EmailService : IEmailService
         //var smtpServer = _config["EmailSettings:SmtpServer"];
         //var username = _config["EmailSettings:Username"];
 
-        //// فرستنده
+        //// Send
         //message.From.Add(new MailboxAddress(sendername, senderEmail));
-        //// گیرنده
+        //// Recive
         //message.To.Add(MailboxAddress.Parse(to));
-        //// موضوع
+        //// Topic
         //message.Subject = subject;
 
-        //// بدنه ایمیل (HTML)
+        //// Eamil Body (HTML)
         //var bodyBuilder = new BodyBuilder
         //{
         //    HtmlBody = body
@@ -46,14 +46,14 @@ public class EmailService : IEmailService
 
         //using var client = new SmtpClient();
 
-        //// اتصال به سرور SMTP
+        //// Connect to Server SMTP
         //var secureOption = enablessl
         //    ? SecureSocketOptions.StartTls
         //    : SecureSocketOptions.None;
 
         //await client.ConnectAsync(smtpServer, port, secureOption, cancellationToken);
 
-        //// اعتبارسنجی
+        //// Authenticate
         //if (!string.IsNullOrEmpty(username))
         //{
         //    await client.AuthenticateAsync(username, password, cancellationToken);

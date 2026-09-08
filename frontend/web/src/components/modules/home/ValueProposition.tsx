@@ -3,7 +3,7 @@ import { Layers, Cpu, Lock, Headphones } from "lucide-react";
 const values = [
   {
     icon: Layers,
-    title: "معماری مقیاس‌پذیر و تمیز",
+    title: "معماری مقیاس‌ پذیر و تمیز",
     description:
       "توسعه کدها با جدیدترین فناوری‌های دات‌نت (.NET 10) و Next.js تا توسعه‌های آتی و اضافه کردن فیچرها بدون خطرات بدهی فنی انجام شود.",
   },

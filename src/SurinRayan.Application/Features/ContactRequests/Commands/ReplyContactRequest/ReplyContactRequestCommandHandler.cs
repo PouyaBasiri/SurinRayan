@@ -22,7 +22,6 @@ public class ReplyContactRequestCommandHandler : IRequestHandler<ReplyContactReq
         if (contactRequest == null)
             return false;
 
-        // آماده‌سازی قالب ایمیل
         string emailSubject = $"پاسخ به درخواست شما: {contactRequest.Subject}";
         string emailBody = $"""
             <div dir="rtl" style="font-family: Tahoma, Arial, sans-serif; line-height: 1.8; color: #333;">
@@ -36,10 +35,8 @@ public class ReplyContactRequestCommandHandler : IRequestHandler<ReplyContactReq
             </div>
             """;
 
-        // ارسال ایمیل
         await _emailService.SendEmailAsync(contactRequest.Email, emailSubject, emailBody, cancellationToken);
 
-        // علامت‌گذاری به عنوان خوانده شده
         contactRequest.IsRead = true;
         await _context.SaveChangesAsync(cancellationToken);
 

@@ -1,5 +1,4 @@
-﻿// Application/DependencyInjection.cs
-using System.Reflection;
+﻿using System.Reflection;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,11 +14,10 @@ public static class DependencyInjection
 
         services.AddValidatorsFromAssembly(assembly);
 
-        // پیکربندی ثبت MediatR
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssemblies(assembly);
-            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>)); // روش جدید ثبت Pipeline Behavior در نسخه‌های جدید
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>)); 
         });
 
 

@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
 
   if (isAdminRoute && !token) {
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname); // حفظ آدرس قبلی
+    loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
   if (isLoginPage && token) {
