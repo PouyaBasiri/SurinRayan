@@ -2,6 +2,9 @@
 
 A modern full-stack web application designed for managing incoming customer support requests and administrative management, built with a **.NET 10 Web API** backend and a **Next.js 15 (App Router)** frontend.
 
+<p align="center">
+  <img src=".github/assets/Animation.gif" alt="SurinRayan Live Demo" width="100%" />
+</p>
 ---
 
 ## 🛠 Tech Stack
@@ -39,6 +42,8 @@ SurinRayan/
 ├── src/              .NET (Controllers, Services, DTOs)
 ├── tests/            Unit Tests / Integration Tests
 ├── .gitignore
+├── LICENSE
+├── SECURITY.md
 ├── docker-compose.yml
 ├── NuGet.Config
 ├── README.md
@@ -66,6 +71,9 @@ URL:http://localhost:3000
 ```
 
 ## 🔑 Demo Access Credentials
+Run CLI:
+docker compose up --build 
+
 To test the admin panel out of the box:
 
 Login Route: /login
