@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, PhoneCall } from "lucide-react";
+import { Menu, X, PhoneCall, User } from "lucide-react";
 
 const navigation = [
   { name: "صفحه اصلی", href: "/" },
   { name: "خدمات ما", href: "/services" },
-  { name: "درباره سورین رایان", href: "/about" },
+  { name: "درباره رایان توسعه سورین", href: "/about" },
   { name: "تماس با ما", href: "/contact" },
 ];
 
@@ -49,13 +49,20 @@ export function Header() {
         </div>
 
         {/* Header CTA */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-center lg:justify-end lg:gap-x-3">
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-all"
           >
             <PhoneCall className="h-4 w-4" />
             درخواست مشاوره
+          </Link>
+           <Link
+            href="/login"
+            className="inline-flex items-center gap-2 rounded-lg bg-gray-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 transition-all"
+          >
+            <User className="h-4 w-4" />
+            پنل مدیریت
           </Link>
         </div>
       </nav>

@@ -67,7 +67,7 @@ export default function AdminSidebar() {
             <ShieldCheck className="h-6 w-6" />
           </div>
           <div>
-            <h2 className="font-bold text-slate-900 text-base">سورین رایان</h2>
+            <h2 className="font-bold text-slate-900 text-base">رایان توسعه سورین</h2>
             <p className="text-xs text-slate-400">پنل مدیریت سیستم</p>
           </div>
         </div>

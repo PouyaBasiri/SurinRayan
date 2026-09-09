@@ -3,8 +3,8 @@ import { ContactForm } from "@/components/modules/contact/ContactForm";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "تماس با ما | شرکت سورین رایان",
-  description: "ارتباط با کارشناسان شرکت سورین رایان جهت دریافت مشاوره رایگان و ثبت سفارش پروژه‌های نرم‌افزاری.",
+  title: "تماس با ما | شرکت رایان توسعه سورین",
+  description: "ارتباط با کارشناسان شرکت رایان توسعه سورین جهت دریافت مشاوره رایگان و ثبت سفارش پروژه‌های نرم‌افزاری.",
 };
 
 export default function ContactPage() {

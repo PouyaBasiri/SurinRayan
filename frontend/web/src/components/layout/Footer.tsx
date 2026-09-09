@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white">سورین رایان</h3>
+            <h3 className="text-xl font-bold text-white">رایان توسعه سورین</h3>
             <p className="text-sm leading-6 text-slate-400">
               ارائه‌دهنده راهکارهای نوین نرم‌افزاری و توسعه سامانه‌های سازمانی با بالاترین استانداردهای فنی.
             </p>
@@ -45,13 +45,13 @@ export function Footer() {
           <div>
             <h4 className="text-sm font-semibold text-white tracking-wider">تعهد به کیفیت</h4>
             <p className="mt-4 text-xs leading-5 text-slate-400">
-              تمامی خدمات سورین رایان با ضمانت پشتیبانی و بر اساس آخرین متدولوژی‌های روز توسعه داده می‌شوند.
+              تمامی خدمات رایان توسعه سورین با ضمانت پشتیبانی و بر اساس آخرین متدولوژی‌های روز توسعه داده می‌شوند.
             </p>
           </div>
         </div>
 
         <div className="mt-12 border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} سورین رایان (surinrayan.ir). تمامی حقوق محفوظ است.
+          © {new Date().getFullYear()} رایان توسعه سورین (surinrayan.ir). تمامی حقوق محفوظ است.
         </div>
       </div>
     </footer>

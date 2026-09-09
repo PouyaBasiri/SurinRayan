@@ -40,7 +40,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mt-6 text-base sm:text-lg leading-8 text-slate-600"
           >
-            شرکت **سورین رایان** طراح و مجری سامانه‌های تحت وب مقیاس‌پذیر، معماری‌های ابرپایه (Cloud-Native) و پلتفرم‌های اختصاصی برای سازمان‌ها و شرکت‌های پیشرو است.
+            <strong>رایان توسعه سورین</strong> طراح و مجری سامانه‌های تحت وب مقیاس‌پذیر، معماری‌های ابرپایه (Cloud-Native) و پلتفرم‌های اختصاصی برای سازمان‌ها و شرکت‌های پیشرو است.
           </motion.p>
 
           {/* Action Buttons */}
@@ -61,7 +61,7 @@ export function HeroSection() {
               href="/services"
               className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 transition-all"
             >
-              مشاهده خدمات سورین رایان
+              مشاهده خدمات رایان توسعه سورین
             </Link>
           </motion.div>
 

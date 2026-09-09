@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "درباره ما | شرکت توسعه نرم‌افزار سورین رایان",
-  description: "آشنایی با ماموریت، چشم‌انداز، ارزش‌های سازمانی و سوابق شرکت سورین رایان در حوزه توسعه سامانه‌های تحت وب و نرم‌افزارهای سازمانی.",
+  title: "درباره ما | شرکت توسعه نرم‌افزار رایان توسعه سورین",
+  description: "آشنایی با ماموریت، چشم‌انداز، ارزش‌های سازمانی و سوابق شرکت رایان توسعه سورین در حوزه توسعه سامانه‌های تحت وب و نرم‌افزارهای سازمانی.",
 };
 
 export default function AboutPage() {
@@ -24,13 +24,13 @@ export default function AboutPage() {
         {/* ۱. بخش سربرگ (Header Section) */}
         <div className="mx-auto max-w-3xl text-center mb-16">
           <span className="text-sm font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-            درباره سورین رایان
+            درباره رایان توسعه سورین
           </span>
           <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl leading-tight">
             همراه هوشمند شما در <span className="text-blue-600">تحول دیجیتال</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed">
-            شرکت **سورین رایان** با تکیه بر دانش فنی پیشرفته و تجارب ارزشمند در صنعت نرم‌افزار، راهکارهای جامع و سفارشی برای توسعه سامانه‌های سازمانی، بسترهای ابری و اپلیکیشن‌های وب ارائه می‌دهد.
+            <strong>رایان توسعه سورین</strong> با تکیه بر دانش فنی پیشرفته و تجارب ارزشمند در صنعت نرم‌افزار، راهکارهای جامع و سفارشی برای توسعه سامانه‌های سازمانی، بسترهای ابری و اپلیکیشن‌های وب ارائه می‌دهد.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function AboutPage() {
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-4">چشم‌انداز ما</h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              تبدیل شدن به مرجع مطمئن و برتر در حوزه طراحی، معماری سیستم‌های نرم‌افزاری و استقرار زیرساخت‌های ابرپایه در منطقه، به‌طوری که نام «سورین رایان» مرادف کیفیت، نوآوری و پایداری در نرم‌افزار باشد.
+              تبدیل شدن به مرجع مطمئن و برتر در حوزه طراحی، معماری سیستم‌های نرم‌افزاری و استقرار زیرساخت‌های ابرپایه در منطقه، به‌طوری که نام «رایان توسعه سورین» مرادف کیفیت، نوآوری و پایداری در نرم‌افزار باشد.
             </p>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function AboutPage() {
         {/* ۳. ارزش‌های سازمانی (Core Values) */}
         <div className="mb-20">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">ارزش‌های بنیادین سورین رایان</h2>
+            <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">ارزش‌های بنیادین رایان توسعه سورین</h2>
             <p className="mt-3 text-sm text-slate-600">
               اصولی که تمام فعالیت‌ها و تصمیم‌گیری‌های ما در پروژه‌ها بر پایه آن‌ها استوار است.
             </p>
@@ -123,7 +123,7 @@ export default function AboutPage() {
             آیا آماده شروع پروژه نرم‌افزاری خود هستید؟
           </h2>
           <p className="mt-3 text-sm text-slate-600 max-w-xl mx-auto">
-            تیم سورین رایان آماده ارائه مشاوره تخصصی و بررسی نیازمندی‌های فنی کسب‌وکار شماست.
+            تیم رایان توسعه سورین آماده ارائه مشاوره تخصصی و بررسی نیازمندی‌های فنی کسب‌وکار شماست.
           </p>
           <div className="mt-6 flex justify-center">
             <Link
@@ -133,9 +133,8 @@ export default function AboutPage() {
               ارتباط با کارشناسان ما
               <ArrowLeft className="h-4 w-4" />
             </Link>
-          </div>
+          </div>         
         </div>
-
       </div>
     </div>
   );

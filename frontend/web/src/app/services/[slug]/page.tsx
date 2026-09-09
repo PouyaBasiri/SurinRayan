@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return { title: "خدمت یافت نشد" };
 
   return {
-    title: `${service.title} | سورین رایان`,
+    title: `${service.title} | رایان توسعه سورین`,
     description: service.shortDescription,
   };
 }
@@ -100,7 +100,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
             {/* Process Steps */}
             <section>
-              <h2 className="text-2xl font-bold text-slate-900 mb-6">مراحل اجرای خدمت در سورین رایان</h2>
+              <h2 className="text-2xl font-bold text-slate-900 mb-6">مراحل اجرای خدمت در رایان توسعه سورین</h2>
               <div className="space-y-4">
                 {service.processSteps.map((step, idx) => (
                   <div key={idx} className="flex gap-4 p-5 rounded-2xl bg-white border border-slate-200">
@@ -125,7 +125,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             <div className="rounded-3xl bg-slate-900 text-white p-8">
               <h3 className="text-xl font-bold mb-3">نیاز به این خدمت دارید؟</h3>
               <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                جهت برآورد زمان، هزینه و دریافت مشاوره تخصصی رایگان، با کارشناسان سورین رایان تماس بگیرید.
+                جهت برآورد زمان، هزینه و دریافت مشاوره تخصصی رایگان، با کارشناسان رایان توسعه سورین تماس بگیرید.
               </p>
               <Link
                 href="/contact"

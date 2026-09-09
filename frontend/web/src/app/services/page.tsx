@@ -4,8 +4,8 @@ import { SERVICES_DATA } from "@/types/service";
 import { Globe, Server, Container, ArrowLeft, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "خدمات تخصصی | شرکت سورین رایان",
-  description: "لیست خدمات تخصصی توسعه نرم‌افزار، طراحی وب‌سایت، توسعه APIهای دات‌نت و خدمات DevOps توسط شرکت سورین رایان.",
+  title: "خدمات تخصصی | شرکت رایان توسعه سورین",
+  description: "لیست خدمات تخصصی توسعه نرم‌افزار، طراحی وب‌سایت، توسعه APIهای دات‌نت و خدمات DevOps توسط شرکت رایان توسعه سورین.",
 };
 
 const iconMap = {
@@ -21,7 +21,7 @@ export default function ServicesPage() {
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-16">
           <span className="text-sm font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full">
-            خدمات سورین رایان
+            خدمات رایان توسعه سورین
           </span>
           <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
             راهکارهای تخصصی نرم‌افزار برای کسب‌وکار شما
