@@ -26,4 +26,4 @@ jobs:
       run: dotnet build SurinRayan.sln --no-restore -c Release
 
     - name: Run Tests
-      run: dotnet test SurinRayan.sln --no-build --verbosity normal
+      run: dotnet test SurinRayan.sln -c Release --no-build --verbosity normal
