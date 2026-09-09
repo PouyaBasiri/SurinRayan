@@ -1,11 +1,22 @@
 # 🚀 SurinRayan — Admin Dashboard & Contact Management System
-
-A modern full-stack web application designed for managing incoming customer support requests and administrative management, built with a **.NET 10 Web API** backend and a **Next.js 15 (App Router)** frontend.
-
+<p align="center">
+A modern full-stack web application designed for managing incoming customer support requests and administrative management, built with a <strong>.NET 10 Web API backend and a <strong>Next.js 15 (App Router)</strong> frontend.
+</p>  
 <p align="center">
   <img src=".github/assets/Animation.gif" alt="SurinRayan Live Demo" width="100%" />
 </p>
----
+<p align="center">
+  <a href="https://github.com/PouyaBasiri/SurinRayan/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/PouyaBasiri/SurinRayan/main.yml?branch=main&style=for-the-badge&logo=github&label=Build%20%26%20Test" alt="Build Status" />
+  </a>
+  <img src="https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 10" />
+  <img src="https://img.shields.io/badge/Next.js-15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 15" />
+  <img src="https://img.shields.io/badge/Docker-Containers-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <a href="./LICENSE">
+    <img src="https://img.shields.io/github/license/PouyaBasiri/SurinRayan?style=for-the-badge&color=blue" alt="License" />
+  </a>
+</p>
 
 ## 🛠 Tech Stack
 
