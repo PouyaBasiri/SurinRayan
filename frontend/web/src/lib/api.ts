@@ -18,13 +18,17 @@ export interface ContactRequestDto {
   subject: string;
   message: string;
   isRead: boolean;
+  IsReplied: boolean;
   createdAt: string;
+  createdAtUtc: string;
 }
 
 export interface PaginatedResult<T> {
   items: T[];
-  pageIndex: number;
-  totalPages: number;
+  pageIndex?: number;
+  pageNumber?: number;
+  pageSize: number;
+  totalPages?: number;
   totalCount: number;
   hasPreviousPage: boolean;
   hasNextPage: boolean;
@@ -62,36 +66,64 @@ function getAuthHeader(): Record<string, string> {
 }
 
 // 2. Retrieve paginated list of messages (Admin panel)
-export async function getContactRequests(page: number = 1, pageSize: number = 10) {
-const response = await fetch(
-    `http://localhost:5000/api/ContactRequest?pageNumber=${page}&pageSize=${pageSize}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        ...getAuthHeader(), // 👈 Send token
-      },
-    }
-  );
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-if (response.status === 401) {
-    // Redirect to login if the token has expired.
-    if (typeof window !== "undefined") {
-      document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-      localStorage.removeItem("token");
-      window.location.href = "/login";
+export async function getContactRequests(
+  pageNumber: number = 1,
+  pageSize: number = 10,
+  searchTerm?: string,
+  isRead?: boolean,
+  isReplied?: boolean
+): Promise<PaginatedResult<ContactRequestDto>> {
+  const hasSearchOrFilter =
+    Boolean(searchTerm && searchTerm.trim() !== "") ||
+    typeof isRead === "boolean" ||
+    typeof isReplied === "boolean";
+
+  const params = new URLSearchParams();
+  params.append("pageNumber", pageNumber.toString());
+  params.append("pageSize", pageSize.toString());
+
+  let targetUrl = "";
+
+  if (hasSearchOrFilter) {
+    // مسیر سرچ و فیلتر
+    targetUrl = `${BASE_URL}/api/Messages`;
+
+    if (searchTerm && searchTerm.trim() !== "") {
+      params.append("searchTerm", searchTerm.trim());
     }
-    throw new Error("نشست شما منقضی شده است. لطفا مجددا وارد شوید.");
+    if (typeof isRead === "boolean") {
+      params.append("isRead", isRead.toString());
+    }
+    if (typeof isReplied === "boolean") {
+      params.append("isReplied", isReplied.toString());
+    }
+  } else {
+    // مسیر عمومی دریافت پیام‌ها
+    targetUrl = `${BASE_URL}/api/ContactRequest`;
   }
+
+  const response = await fetch(`${targetUrl}?${params.toString()}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!response.ok) {
-    throw new Error("خطا در دریافت اطلاعات از سرور");
+    const errorText = await response.text();
+    throw new Error(`خطای سرور (${response.status}): ${errorText || "عدم پاسخگویی سرویس"}`);
   }
+    const result = await response.json();
 
-  return await response.json();
-
+  return {
+  ...result,
+  pageIndex: result.pageIndex ?? result.pageNumber ?? 1,
+  totalPages: result.totalPages ?? Math.ceil(result.totalCount / result.pageSize),
+};
+  
 }
-
 // 3. Mark message as read (Admin panel)
 export async function markContactRequestAsRead(id: string): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/Contact/${id}/read`, {

@@ -69,7 +69,7 @@ cd backend
 dotnet restore
 dotnet run
 
-URL:http://localhost:5054
+URL:http://localhost:5000
 ```
 
 ### 2. Next.js
@@ -82,9 +82,10 @@ URL:http://localhost:3000
 ```
 
 ## 🔑 Demo Access Credentials
+```
 Run CLI:
 docker compose up --build 
-
+```
 To test the admin panel out of the box:
 
 Login Route: /login

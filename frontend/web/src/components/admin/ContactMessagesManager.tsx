@@ -8,6 +8,7 @@ import {
   ContactRequestDto,
   PaginatedResult,
 } from "@/lib/api";
+import MessageFilters from "./MessageFilters";
 import {
   Mail,
   MailOpen,
@@ -29,61 +30,94 @@ export function ContactMessagesManager() {
   const [page, setPage] = useState<number>(1);
   const [selectedMessage, setSelectedMessage] = useState<ContactRequestDto | null>(null);
 
+  // Search & Filter States
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [debouncedSearch, setDebouncedSearch] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<"all" | "unread" | "replied">("all");
+
   // Modal Reply States
   const [replyText, setReplyText] = useState<string>("");
   const [sendingReply, setSendingReply] = useState<boolean>(false);
   const [alert, setAlert] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  // تابع دریافت داده‌ها با useCallback
-const fetchMessages = useCallback(async () => {
-   // console.log("🚀 شروع دریافت پیام‌ها..."); // این لاگ را اضافه کنید
-  setLoading(true);
-  setAlert(null); // پاک کردن آلرت‌های قبلی
-  try {
-    const result = await getContactRequests(page, 10);
-    setData(result);
-  } catch (err: unknown) {
-    // console.error("❌ خطا در fetchMessages:", err); // این لاگ را اضافه کنید
+  // 1. هندلر تغییر کلمه جستجو (صفحه به 1 ریست می‌شود)
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value);
+    setPage(1);
+  };
 
-    if (err instanceof Error) {
-      setAlert({ type: "error", text: err.message || "خطا در ارتباط با سرور" });
-    } else {
-      setAlert({ type: "error", text: "یک خطای ناشناخته رخ داد." });
-    }
-  } finally {
-    setLoading(false); // این بخش حتماً اجرا می‌شود و لودینگ را می‌بندد
-  }
-}, [page]);
+  // 2. هندلر تغییر تب (صفحه به 1 ریست می‌شود)
+  const handleTabChange = (tab: "all" | "unread" | "replied") => {
+    setActiveTab(tab);
+    setPage(1);
+  };
 
-useEffect(() => {
-  //console.log("🔥 کامپوننت رندر شد و useEffect فراخوانی شد!");
+  // 3. Debounce فقط برای به‌روزرسانی مقدار debouncedSearch استفاده می‌شود
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 400);
 
-  async function loadData() {
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  // 4. تابع دریافت اطلاعات با برطرف شدن مشکل setState همزمان
+  const fetchMessages = useCallback(async () => {
     setLoading(true);
+    setAlert(null);
+
+    let isRead: boolean | undefined = undefined;
+    let isReplied: boolean | undefined = undefined;
+
+    if (activeTab === "unread") {
+      isRead = false;
+    } else if (activeTab === "replied") {
+      isReplied = true;
+    }
+
     try {
-      //console.log("📡 در حال ارسال درخواست به API...");
-      const result = await getContactRequests(page, 10);
-      //console.log("✅ پاسخ از سرور دریافت شد:", result);
-      setData(result);
+      const result = await getContactRequests(
+        page,
+        10,
+        debouncedSearch,
+        isRead,
+        isReplied
+      );
+
+      if (result && Array.isArray(result.items)) {
+        setData(result);
+      } else {
+        setData({
+          items: [],
+          totalCount: 0,
+          pageIndex: 1,
+          totalPages: 1,
+          hasNextPage: false,
+          hasPreviousPage: false,
+        });
+        setAlert({ type: "error", text: "فرمت داده‌های دریافتی از سرور معتبر نیست." });
+      }
     } catch (err: unknown) {
-      //console.error("❌ خطا در دریافت پیام‌ها:", err);
-      setAlert({ 
-        type: "error", 
-        text: (err as Error)?.message || "خطا در ارتباط با API" 
-      });
+      if (err instanceof Error) {
+        setAlert({ type: "error", text: err.message || "خطا در ارتباط با سرور" });
+      } else {
+        setAlert({ type: "error", text: "یک خطای ناشناخته رخ داد." });
+      }
     } finally {
       setLoading(false);
     }
-  }
-  loadData();
-}, [page]);
-  // باز کردن پیام و علامت‌گذاری به عنوان خوانده‌شده
+  }, [page, debouncedSearch, activeTab]);
+
+  useEffect(() => {
+    fetchMessages();
+  }, [fetchMessages]);
+
+  // باز کردن پیام و Optimistic Update
   const handleOpenMessage = async (msg: ContactRequestDto) => {
     setSelectedMessage(msg);
     setReplyText("");
 
     if (!msg.isRead) {
-      // به‌روزرسانی محلی UI (Optimistic Update)
       setData((prevData) => {
         if (!prevData) return null;
         return {
@@ -96,8 +130,7 @@ useEffect(() => {
 
       try {
         await markContactRequestAsRead(msg.id);
-      } catch (err: unknown) {
-        // بازگرداندن وضعیت به قبل در صورت بروز خطا
+      } catch {
         setData((prevData) => {
           if (!prevData) return null;
           return {
@@ -107,7 +140,6 @@ useEffect(() => {
             ),
           };
         });
-        //console.error("خطا در به‌روزرسانی وضعیت خوانده‌شده", err);
       }
     }
   };
@@ -121,7 +153,7 @@ useEffect(() => {
 
     try {
       await replyToContactRequest(selectedMessage.id, replyText);
-      setAlert({ type: "success", text: "پاسخ با موفقیت ایمیل شد." });
+      setAlert({ type: "success", text: "پاسخ با موفقیت ثبت/ارسال شد." });
       setReplyText("");
       setTimeout(() => {
         setSelectedMessage(null);
@@ -145,7 +177,7 @@ useEffect(() => {
           <div>
             <h1 className="text-2xl font-bold text-slate-900">مدیریت پیام‌های تماس</h1>
             <p className="text-slate-500 text-sm mt-1">
-              پیام‌های دریافتی از فرم تماس با ما را بررسی و پاسخ دهید.
+              پیام‌های دریافتی از فرم تماس با ما را بررسی، جستجو و پاسخ دهید.
             </p>
           </div>
         </div>
@@ -167,6 +199,14 @@ useEffect(() => {
             <span>{alert.text}</span>
           </div>
         )}
+
+        {/* Message Filters Component */}
+        <MessageFilters
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+        />
 
         {/* Messages Table */}
         <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
@@ -211,7 +251,9 @@ useEffect(() => {
                       <td className="p-4 text-slate-900">{msg.fullName}</td>
                       <td className="p-4 text-slate-700 max-w-xs truncate">{msg.subject}</td>
                       <td className="p-4 text-slate-500 text-xs">
-                        {new Date(msg.createdAt).toLocaleDateString("fa-IR")}
+                        {msg.createdAtUtc && !msg.createdAtUtc.startsWith("0001")
+                         ? new Date(msg.createdAtUtc).toLocaleDateString("fa-IR")
+                         : "نامشخص"}
                       </td>
                       <td className="p-4">
                         <button
@@ -254,12 +296,11 @@ useEffect(() => {
           )}
         </div>
 
-        {/* Modal: View & Reply Message */}
+        {/* Modal View/Reply */}
         {selectedMessage && (
           <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
             <div className="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-xl border border-slate-100 space-y-6">
               
-              {/* Modal Header */}
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <h2 className="text-lg font-bold text-slate-900">جزئیات پیام و ارسال پاسخ</h2>
                 <button
@@ -270,7 +311,6 @@ useEffect(() => {
                 </button>
               </div>
 
-              {/* Message Details */}
               <div className="bg-slate-50 p-4 rounded-2xl space-y-3 border border-slate-100">
                 <div className="grid grid-cols-2 gap-4 text-xs text-slate-600">
                   <div className="flex items-center gap-1.5">
@@ -289,7 +329,7 @@ useEffect(() => {
                     <Clock className="h-4 w-4 text-slate-400" />
                     <span>
                       <strong>تاریخ:</strong>{" "}
-                      {new Date(selectedMessage.createdAt).toLocaleString("fa-IR")}
+                      {new Date(selectedMessage.createdAtUtc).toLocaleString("fa-IR")}
                     </span>
                   </div>
                 </div>
@@ -302,7 +342,6 @@ useEffect(() => {
                 </div>
               </div>
 
-              {/* Reply Section */}
               <div className="space-y-3">
                 <label className="block text-xs font-semibold text-slate-700">
                   متن پاسخ ایمیلی به {selectedMessage.fullName}:
@@ -311,12 +350,11 @@ useEffect(() => {
                   rows={4}
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
-                  placeholder="پاسخ خود را بنویسید (این متن به ایمیل فرستنده ارسال می‌شود)..."
+                  placeholder="پاسخ خود را بنویسید..."
                   className="w-full rounded-2xl border border-slate-200 p-4 text-sm focus:border-blue-600 focus:outline-none"
                 />
               </div>
 
-              {/* Modal Actions */}
               <div className="flex items-center justify-end gap-3 pt-2">
                 <button
                   onClick={() => setSelectedMessage(null)}
@@ -332,7 +370,7 @@ useEffect(() => {
                   {sendingReply ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      در حال ارسال ایمیل...
+                      در حال ارسال پاسخ...
                     </>
                   ) : (
                     <>
