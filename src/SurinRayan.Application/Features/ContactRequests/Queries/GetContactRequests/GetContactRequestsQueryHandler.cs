@@ -42,7 +42,8 @@ public class GetContactRequestsQueryHandler
                 Subject = x.Subject,
                 Message = x.Message,
                 IsRead = x.IsRead,
-                CreatedAt = x.CreatedAt
+                CreatedAt = x.CreatedAt,
+                CreatedAtUtc = x.CreatedAtUtc
             })
             .ToListAsync(cancellationToken);
 
