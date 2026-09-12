@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.2.2
 
     - name: Setup .NET 10
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v4.3.0
       with:
         dotnet-version: '10.0.x'
 
@@ -30,6 +30,9 @@ jobs:
 
   release:
     needs: build-dotnet
+    permissions:
+      contents: write
+      releases: write
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
