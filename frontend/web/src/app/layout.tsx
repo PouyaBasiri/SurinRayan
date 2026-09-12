@@ -2,22 +2,21 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
+import { FloatingChat } from "@/components/chat/FloatingChat";
 
 export const metadata: Metadata = {
   title: "رایان توسعه سورین | راهکارهای توسعه نرم‌افزار و سامانه‌های سازمانی",
   description: "شرکت رایان توسعه سورین ارائه‌دهنده خدمات تخصصی نرم‌افزار، مشاوره فنی و طراحی سامانه‌های سازمانی با فناوری‌های روز.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="fa" dir="rtl">
       <body className="flex min-h-screen flex-col justify-between antialiased">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">{children}
+          <FloatingChat />
+        </main>
         <Footer />
       </body>
     </html>

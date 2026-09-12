@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.AI;
 using Microsoft.IdentityModel.Tokens;
+using OpenAI;
+using OpenAI.Chat;
 using SurinRayan.Application;
 using SurinRayan.Application.Common.Interfaces;
 using SurinRayan.Infrastructure;
@@ -7,6 +10,23 @@ using SurinRayan.Infrastructure.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string openRouterKey = "sk-or-v1-YOUR_OPENAI_API_KEY_HERE";
+
+var chatOptions = new ChatOptions
+{
+    MaxOutputTokens = 1000 
+};
+
+
+var options = new OpenAIClientOptions
+{
+    Endpoint = new Uri("https://openrouter.ai/api/v1")
+};
+
+var openAiClient = new OpenAIClient(new System.ClientModel.ApiKeyCredential(openRouterKey), options);
+ChatClient chatClient = openAiClient.GetChatClient("google/gemini-3.1-flash-lite");
+IChatClient aiChatClient = chatClient.AsIChatClient();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -16,6 +36,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+builder.Services.AddSingleton<IChatClient>(aiChatClient);
 
 var jwtKey = builder.Configuration["JwtSettings:SecretKey"]!;
 builder.Services.AddAuthentication(options =>
@@ -65,10 +86,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-app.UseCors("SignalRCorsPolicy");
-app.MapHub<SurinRayan.Infrastructure.Hubs.NotificationHub>("/hubs/notifications");
 
-app.UseCors("AllowNextJS");
 
 if (app.Environment.IsDevelopment())
 {
@@ -81,10 +99,13 @@ else
 }
 
 app.UseRouting();
+app.UseCors("AllowNextJS");
+app.UseCors("SignalRCorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<SurinRayan.Infrastructure.Hubs.NotificationHub>("/hubs/notifications");
 
 app.Run();

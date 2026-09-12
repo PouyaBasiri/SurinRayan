@@ -19,6 +19,7 @@ export function useNotificationHub(onNewMessage?: (msg: ContactRequestDto) => vo
       .withAutomaticReconnect()
       .build();
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setConnection(newConnection);
   }, []);
 
