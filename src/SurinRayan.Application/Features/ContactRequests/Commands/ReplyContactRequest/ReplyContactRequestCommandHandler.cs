@@ -38,6 +38,7 @@ public class ReplyContactRequestCommandHandler : IRequestHandler<ReplyContactReq
         await _emailService.SendEmailAsync(contactRequest.Email, emailSubject, emailBody, cancellationToken);
 
         contactRequest.IsRead = true;
+        contactRequest.IsReplied = true;
         await _context.SaveChangesAsync(cancellationToken);
 
         return true;

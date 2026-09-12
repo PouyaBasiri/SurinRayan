@@ -91,6 +91,7 @@ export function ContactMessagesManager() {
           items: [],
           totalCount: 0,
           pageIndex: 1,
+          pageSize: 10,
           totalPages: 1,
           hasNextPage: false,
           hasPreviousPage: false,
@@ -109,6 +110,7 @@ export function ContactMessagesManager() {
   }, [page, debouncedSearch, activeTab]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMessages();
   }, [fetchMessages]);
 
@@ -270,8 +272,7 @@ export function ContactMessagesManager() {
             </div>
           )}
 
-          {/* Pagination Controls */}
-          {data && data.totalPages > 1 && (
+          {data && data.totalPages !== undefined && data.totalPages > 1 && (
             <div className="flex items-center justify-between p-4 border-t border-slate-100 bg-slate-50 text-sm">
               <span className="text-slate-500 text-xs">
                 صفحه {data.pageIndex} از {data.totalPages} (مجموع: {data.totalCount} پیام)
