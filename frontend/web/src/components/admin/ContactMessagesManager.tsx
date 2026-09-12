@@ -9,6 +9,7 @@ import {
   PaginatedResult,
 } from "@/lib/api";
 import MessageFilters from "./MessageFilters";
+import { useNotificationHub } from "@/hooks/useNotificationHub";
 import {
   Mail,
   MailOpen,
@@ -40,6 +41,7 @@ export function ContactMessagesManager() {
   const [sendingReply, setSendingReply] = useState<boolean>(false);
   const [alert, setAlert] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
+  
   // 1. هندلر تغییر کلمه جستجو (صفحه به 1 ریست می‌شود)
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
@@ -114,6 +116,21 @@ export function ContactMessagesManager() {
     fetchMessages();
   }, [fetchMessages]);
 
+    useNotificationHub(
+    useCallback((newMessage: ContactRequestDto) => {
+      console.log("New Real-time Message Received:", newMessage);
+      
+      // اضافه کردن پیام جدید به بالای لیست جاری
+      setData((prevData) => {
+        if (!prevData) return null;
+        return {
+          ...prevData,
+          items: [newMessage, ...prevData.items],
+          totalCount: prevData.totalCount + 1,
+        };
+      });
+    }, [])
+  );
   // باز کردن پیام و Optimistic Update
   const handleOpenMessage = async (msg: ContactRequestDto) => {
     setSelectedMessage(msg);

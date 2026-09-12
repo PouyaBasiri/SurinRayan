@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
+builder.Services.AddSignalR();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddTransient<IEmailService, EmailService>();
@@ -63,6 +64,9 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+app.UseCors("SignalRCorsPolicy");
+app.MapHub<SurinRayan.Infrastructure.Hubs.NotificationHub>("/hubs/notifications");
 
 app.UseCors("AllowNextJS");
 

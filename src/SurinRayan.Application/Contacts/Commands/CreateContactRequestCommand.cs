@@ -1,6 +1,8 @@
 ﻿using MediatR;
-using SurinRayan.Domain.Entities;
 using SurinRayan.Application.Common.Interfaces;
+using SurinRayan.Application.Features.ContactRequests.DTOs;
+using SurinRayan.Domain.Entities;
+using SurinRayan.Domain.Events;
 
 namespace SurinRayan.Application.Contacts.Commands;
 
@@ -15,10 +17,12 @@ public record CreateContactRequestCommand(
 public class CreateContactRequestCommandHandler : IRequestHandler<CreateContactRequestCommand, Guid>
 {
     private readonly IApplicationDbContext _context;
+    private readonly IPublisher _publisher;
 
-    public CreateContactRequestCommandHandler(IApplicationDbContext context)
+    public CreateContactRequestCommandHandler(IApplicationDbContext context,IPublisher publisher)
     {
         _context = context;
+        _publisher = publisher;
     }
 
     public async Task<Guid> Handle(CreateContactRequestCommand request, CancellationToken cancellationToken)
@@ -34,6 +38,19 @@ public class CreateContactRequestCommandHandler : IRequestHandler<CreateContactR
 
         _context.ContactRequests.Add(entity);
         await _context.SaveChangesAsync(cancellationToken);
+
+        var dto = new ContactRequestDto
+        {
+            Id = entity.Id,
+            FullName = entity.FullName,
+            Email = entity.Email,
+            PhoneNumber = entity.PhoneNumber,
+            Subject = entity.Subject,
+            Message = entity.Message,
+            IsRead = entity.IsRead,
+            CreatedAtUtc = entity.CreatedAtUtc
+        };
+        await _publisher.Publish(new ContactRequestCreatedEvent(dto), cancellationToken);
 
         return entity.Id;
     }
