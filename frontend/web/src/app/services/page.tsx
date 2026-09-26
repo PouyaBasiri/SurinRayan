@@ -16,15 +16,15 @@ const iconMap = {
 
 export default function ServicesPage() {
   return (
-    <div className="bg-slate-50/50 py-16 lg:py-24">
+    <div className="bg-slate-900 py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center mb-16">
           <span className="text-sm font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full">
             خدمات رایان توسعه سورین
           </span>
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            راهکارهای تخصصی نرم‌افزار برای کسب‌وکار شما
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+            راهکارهای تخصصی نرم‌افزار
           </h1>
           <p className="mt-4 text-slate-600 text-base sm:text-lg">
             ما پروژه‌های شما را با آخرین استانداردهای مهندسی نرم‌افزار و معماری‌های مدرن پیاده‌سازی می‌کنیم.

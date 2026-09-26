@@ -42,6 +42,8 @@ services:
       - JwtSettings__SecretKey=YourSuperSecretKeyForJwtAuthentication123456!
       - JwtSettings__Issuer=SurinRayanApi
       - JwtSettings__Audience=SurinRayanClient
+      OpenRouter__ApiKey: ${OPENROUTER_API_KEY}
+      OpenAI__ApiKey: ${OPENAI_API_KEY}
     depends_on:
       - postgres
     networks:

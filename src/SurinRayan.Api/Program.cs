@@ -11,7 +11,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string openRouterKey = "sk-or-v1-YOUR_OPENAI_API_KEY_HERE";
+var openRouterKey = builder.Configuration["OpenRouter:ApiKey"];
 
 var chatOptions = new ChatOptions
 {

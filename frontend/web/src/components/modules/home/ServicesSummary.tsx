@@ -22,7 +22,7 @@ const services = [
 export function ServicesSummary() {
   return (
     <section className="py-20 bg-slate-900 text-white">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto  max-w-7xl px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
             <span className="text-blue-400 font-semibold text-sm">خدمات تخصصی</span>

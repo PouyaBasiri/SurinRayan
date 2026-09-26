@@ -6,8 +6,6 @@ import {
   ShieldCheck, 
   Zap, 
   Users, 
-  Award, 
-  CheckCircle2, 
   ArrowLeft 
 } from "lucide-react";
 
@@ -18,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-white py-12 lg:py-20">
+    <div className="bg-slate-900 py-12 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         
         {/* ۱. بخش سربرگ (Header Section) */}
@@ -26,7 +24,7 @@ export default function AboutPage() {
           <span className="text-sm font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
             درباره رایان توسعه سورین
           </span>
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl leading-tight">
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-5xl leading-tight">
             همراه هوشمند شما در <span className="text-blue-600">تحول دیجیتال</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed">

@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-slate-50/50 py-16 lg:py-24">
+    <div className="min-h-screen bg-slate-900 py-12 text-slate-100">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center mb-16">
           <span className="text-sm font-semibold uppercase tracking-wider text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full">
             ارتباط با ما
           </span>
-          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
             منتظر شنیدن صدای گرم شما هستیم
           </h1>
           <p className="mt-4 text-slate-600 text-base sm:text-lg">
@@ -30,7 +30,7 @@ export default function ContactPage() {
               <Phone className="h-6 w-6 text-blue-600 shrink-0 mt-1" />
               <div>
                 <h3 className="font-bold text-slate-900 text-sm">شماره تلفن</h3>
-                <p className="text-slate-600 text-sm mt-1">۰۲۱-۱۲۳۴۵۶۷۸</p>
+                <p className="text-slate-600 text-sm mt-1">919-4006705</p>
               </div>
             </div>
 
@@ -46,7 +46,7 @@ export default function ContactPage() {
               <MapPin className="h-6 w-6 text-blue-600 shrink-0 mt-1" />
               <div>
                 <h3 className="font-bold text-slate-900 text-sm">آدرس دفتر مرکزی</h3>
-                <p className="text-slate-600 text-sm mt-1">تهران، خیابان آزادی، پلاک ۱</p>
+                <p className="text-slate-600 text-sm mt-1">تهران، خیابان آزادی، سلسبیل شمالی،کوچه کریمی،پلاک 10</p>
               </div>
             </div>
 
